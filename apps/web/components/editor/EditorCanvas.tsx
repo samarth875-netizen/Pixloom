@@ -501,6 +501,23 @@ export function EditorCanvas() {
     }
   };
 
+  // Double-click a text layer to edit its content
+  const handleDoubleClick = (e: React.MouseEvent<HTMLCanvasElement>) => {
+    const coords = getCanvasCoords(e);
+    const layer = hitTestLayer(coords.x, coords.y);
+    if (!layer || layer.type !== "text") return;
+
+    setActiveLayerId(layer.id);
+    const textVal = prompt("Edit text:", layer.text ?? "");
+    if (textVal !== null) {
+      updateLayer(layer.id, {
+        text: textVal,
+        name: `Text (${textVal.slice(0, 8)})` || "Text",
+      });
+      recordHistory("Edit Text");
+    }
+  };
+
   // Drag & drop upload handlers
   const handleDragOver = (e: React.DragEvent) => {
     e.preventDefault();
@@ -649,6 +666,7 @@ export function EditorCanvas() {
           onMouseDown={handleMouseDown}
           onMouseMove={handleMouseMove}
           onMouseUp={handleMouseUp}
+          onDoubleClick={handleDoubleClick}
           className="relative z-10 rounded-lg block"
           style={{ width: canvasWidth, height: canvasHeight }}
         />

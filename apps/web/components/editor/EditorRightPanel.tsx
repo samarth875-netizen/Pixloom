@@ -213,6 +213,63 @@ export function EditorRightPanel({ onExport }: EditorRightPanelProps) {
                   ))}
                 </select>
               </div>
+
+              {/* Text Editing Controls */}
+              {activeLayer.type === "text" && (
+                <div className="space-y-3 pt-1">
+                  <div className="space-y-1">
+                    <label className="text-[11px] text-[#9CA3AF]">Text Content</label>
+                    <textarea
+                      value={activeLayer.text ?? ""}
+                      rows={2}
+                      onChange={(e) => {
+                        const value = e.target.value;
+                        updateLayer(activeLayer.id, {
+                          text: value,
+                          name: `Text (${value.slice(0, 8)})` || "Text",
+                        });
+                      }}
+                      placeholder="Enter text…"
+                      className="w-full bg-black/60 border border-white/15 text-xs text-white rounded-lg px-2.5 py-1.5 resize-none focus:outline-none focus:border-[#F5F547] placeholder:text-[#9CA3AF]/60"
+                    />
+                  </div>
+
+                  <div className="space-y-1">
+                    <label className="text-[11px] text-[#9CA3AF]">Font Size</label>
+                    <div className="flex items-center gap-2">
+                      <input
+                        type="range"
+                        min="8"
+                        max="200"
+                        value={activeLayer.fontSize ?? 48}
+                        onChange={(e) =>
+                          updateLayer(activeLayer.id, {
+                            fontSize: Number(e.target.value),
+                          })
+                        }
+                        className="flex-1 accent-[#F5F547] cursor-pointer"
+                      />
+                      <span className="text-xs text-white font-mono w-10 text-right">
+                        {activeLayer.fontSize ?? 48}px
+                      </span>
+                    </div>
+                  </div>
+
+                  <div className="space-y-1">
+                    <label className="text-[11px] text-[#9CA3AF]">Text Color</label>
+                    <input
+                      type="color"
+                      value={activeLayer.textColor ?? "#FFFFFF"}
+                      onChange={(e) =>
+                        updateLayer(activeLayer.id, {
+                          textColor: e.target.value,
+                        })
+                      }
+                      className="w-10 h-8 rounded-lg cursor-pointer border border-white/15 bg-transparent p-0 overflow-hidden"
+                    />
+                  </div>
+                </div>
+              )}
             </div>
           )}
 
