@@ -90,10 +90,9 @@ REPLICATE_API_TOKEN=your-replicate-api-token
 NEXT_PUBLIC_APP_URL=http://localhost:3000
 ```
 
-> **Authentication**: The app uses Supabase for email/password + Google sign-in.
+> **Authentication**: The app uses Supabase for email/password sign-in.
 > Create a project at [supabase.com](https://supabase.com), grab the URL + anon key,
-> and configure the **Google** provider in Authentication → Providers
-> (add the callback URL `http://localhost:3000/auth/callback`).
+> and add the callback URL `http://localhost:3000/auth/callback`.
 > If the env vars are missing, the app still runs but `/editor` and `/dashboard`
 > won't require login, and auth pages will show a setup notice.
 
