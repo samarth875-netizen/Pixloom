@@ -168,9 +168,11 @@ export function EditorRightPanel({ onExport }: EditorRightPanelProps) {
 
       {/* Tab 1: Layers */}
       {activeTab === "layers" && (
-        <div className="flex-1 flex flex-col justify-between overflow-hidden">
-          {/* Active Layer Controls */}
-          {activeLayer && (
+        <div className="flex-1 flex flex-col min-h-0">
+          {/* Scrollable area: active controls + layer list */}
+          <div className="flex-1 overflow-y-auto min-h-0">
+            {/* Active Layer Controls */}
+            {activeLayer && (
             <div className="p-4 border-b border-white/[0.08] bg-[#171717]/60 space-y-3">
               <div className="flex items-center justify-between text-xs font-bold text-white">
                 <span>Selected: {activeLayer.name}</span>
@@ -274,7 +276,7 @@ export function EditorRightPanel({ onExport }: EditorRightPanelProps) {
           )}
 
           {/* Layer Stack List */}
-          <div className="flex-1 overflow-y-auto p-3 space-y-2">
+          <div className="p-3 space-y-2">
             {layers.length === 0 ? (
               <div className="text-center py-12 text-[#9CA3AF] text-xs">
                 No layers added. Upload an image to start.
@@ -360,6 +362,7 @@ export function EditorRightPanel({ onExport }: EditorRightPanelProps) {
                   );
                 })
             )}
+          </div>
           </div>
 
           {/* Bottom Layer Toolbar */}
